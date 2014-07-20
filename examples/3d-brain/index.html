@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> 3D Brain using spritel</title>
+        <style>
+            body {
+                background: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="brain"></div>
+
+        <input type="button" onclick="sprite.stop()"/>
+
+        <script type="text/javascript" src="../../src/spritrel.js"></script>
+        <script type="text/javascript">
+            var sprite = new spritrel('#brain', {rows : 18, cols: 5, width: 200, height: 130, img : 'brain.png'});
+            sprite.start();
+
+        </script>
+    </body>
+</html>

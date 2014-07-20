@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> 3D Mario using spritel</title>
+    </head>
+    <body>
+        <div id="walk"></div>
+        <script type="text/javascript" src="../../src/spritrel.js"></script>
+        <script type="text/javascript">
+            var sprite = new spritrel('#walk', {rows : 8, cols: 13, width: 128, height: 128, img : 'walk.png', fps : 10});
+            sprite.start();
+
+        </script>
+    </body>
+</html>
