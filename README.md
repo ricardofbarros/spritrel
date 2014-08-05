@@ -5,7 +5,7 @@ Spritrel is a animater for css sprites, It can animate a single dimensional or m
 ## Quick Example
 
 ```javascript
-var sprite = new spritrel('#brain', {rows : 18, cols: 5, width: 200, height: 130, img : 'brain.png'});
+var sprite = spritrel.create('#brain', {rows : 18, cols: 5});
 sprite.start();
 ```
 
@@ -13,6 +13,7 @@ The API for spritrel is more richer than just a start and a stop, check the rest
 
 ## Browser Support
 
+It should work in FF, Chrome and IE 9 +
 
 
 ## Download
@@ -21,6 +22,8 @@ The source is available for download from [GitHub](https://github.com/ricardofba
 ## API
 
 ### Flow control
+* [resume](#resume)
+* [pause](#pause)
 * [start](#start)
 * [stop](#stop)
 * [goTo](#goTo)
