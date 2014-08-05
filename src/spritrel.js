@@ -1,4 +1,4 @@
-(function ( $ ) {
+0(function ( $ ) {
     // Error messages
     var errorMissingElem = 'You need to give a valid Id or Class of an element',
         errorMissingOptions = 'You need to set the required params in options';
@@ -71,57 +71,88 @@
          * @type type
          */
         var Spritrel = {};
-
-        // Flow control fn
-        Spritrel.start = function() {
-            var countCols = 0;
-            var countRows = 0;
-            
-            loop = setInterval(function() {
-                var posX = countCols * options.width;
-                var posY = countRows * options.height;
-                element.style.backgroundPosition =  '-'+posX+'px -'+posY+'px';
-
-                if(countRows >= (options.rows - 1) && countCols >= (options.cols - 1)) {
-                    countCols = 0;
-                    countRows = 0;
-                } else {
-                    if(countCols >= (options.cols - 1)) {
-                        countCols = 0;
-                        countRows++;
-                    } else {
-                        countCols++;
-                    }
-                }
-            },interval);                
+        
+        Spritrel._direction = 'right';  
+        Spritrel._countCols = 0;
+        Spritrel._countRows = 0;
+                
+        var resetCounters = function() {
+            if(Spritrel._direction === 'right') {
+                Spritrel._countCols = 0;
+                Spritrel._countRows = 0;                 
+            } else {
+                Spritrel._countCols = options.cols - 1; 
+                Spritrel._countRows = options.rows - 1;             
+            }           
         };
 
-        Spritrel.stop = function() {
+        // Flow control fn
+        Spritrel.pause = function() {
             clearInterval(loop);                     
         };
         
         Spritrel.resume = function() {
-            
-            
+            Spritrel.pause();
+            loop = setInterval(function() {
+                var posX = Spritrel._countCols * options.width;
+                var posY = Spritrel._countRows * options.height;
+                element.style.backgroundPosition =  '-'+posX+'px -'+posY+'px';
+                
+                if(Spritrel._direction === 'right') {
+                    if(Spritrel._countRows >= (options.rows - 1) && Spritrel._countCols >= (options.cols - 1)) {
+                        resetCounters();
+                    } else {
+                        if(Spritrel._countCols >= (options.cols - 1)) {
+                            Spritrel._countCols = 0;
+                            Spritrel._countRows++;
+                        } else {
+                            Spritrel._countCols++;
+                        }
+                    }
+                } else {
+                    if(Spritrel._countRows <= 0 && Spritrel._countCols <= 0) {
+                        resetCounters();
+                    } else {
+                        if(Spritrel._countCols <= 0) {
+                            Spritrel._countCols = options.cols - 1;
+                            Spritrel._countRows--;
+                        } else {
+                            Spritrel._countCols--;
+                        }
+                    }                    
+                }
+            },interval);             
         };
         
+        Spritrel.start = function() {
+            resetCounters();
+            Spritrel.resume();
+        };
+
+        Spritrel.stop = function() {
+            resetCounters();
+            Spritrel.pause();
+            element.style.backgroundPosition =  '0px 0px';
+        };        
         
-        Spritrel.goTo = function() {
+        
+        Spritrel.goTo = function(sprite) {
 
         };
 
 
         Spritrel.changeDirection = function() {
-
+            if(Spritrel._direction === 'right') {
+                Spritrel._direction = 'left';
+            } else {
+                Spritrel._direction = 'right';
+            }
+            Spritrel.resume();            
         };
 
         Spritrel.changeSpeed = function(fps) {
-
-        };
-
-        Spritrel.flip = function() {
-
-
+            interval = 1000 / fps;
+            Spritrel.resume();
         };
 
         // Event control fn

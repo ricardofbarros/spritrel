@@ -8,22 +8,47 @@
                 margin: 50px auto;
                 width: 400px;  
             }
+
+            #control-panel > div {
+                vertical-align: top;
+                display: inline-block;
+                background-color: #b0c3c7;
+                border-radius: 4px;
+                border: 1px solid white;  
+                margin-top: 50px;                
+            }
+            
+            input {
+                height: 40px;
+            }
+            
+            input[type=text] {
+                font-size: 18px;
+                width: 80px;
+            }
             
             input[type=button] {
-                width: 100px;
-                height: 40px;
                 font-size: 14px;
+                width: 120px;
+                cursor: pointer;
             }
+           
         </style>
     </head>
     <body>
         <img id="brain" src="brain.png"/>
-        
-        <div style="background-color: #b0c3c7; border-radius: 4px;
-             border: 1px solid white; width: 100px; margin-top: 50px;
-             height: 200px;">
-            <input type="button" value="Stop" onclick="sprite.stop()"> <br/>
-            <input type="button" value="Start" onclick="sprite.start()"><br/>
+        <div id="control-panel">
+            <div>
+                <input type="button" value="Pause" onclick="sprite.pause()"> <br/>
+                <input type="button" value="Resume" onclick="sprite.resume()"><br/>
+                <input type="button" value="Stop" onclick="sprite.stop()"> <br/>
+                <input type="button" value="Start" onclick="sprite.start()"><br/>
+                <input type="button" value="Change direction" onclick="sprite.changeDirection()"/>
+            </div>
+            <div>
+                <input id="fps-input" type="text" value="">
+                <input type="button" value="Change speed" onclick="sprite.changeSpeed(document.getElementById('fps-input').value)"><br/>
+            </div>
         </div>
         <script type="text/javascript" src="../../src/spritrel.js"></script>
         <script type="text/javascript">
@@ -35,8 +60,6 @@
             });
             
             sprite.start();
-
-
         </script>
     </body>
 </html>
