@@ -26,7 +26,7 @@ The source is available for download from [GitHub](https://github.com/ricardofba
 * [goTo](#goTo)
 * [changeDirection](#changeDirection)
 * [changeSpeed](#changeSpeed)
-* [flip](#flip)
+
 
 ### Event control
 * [on](#on)
