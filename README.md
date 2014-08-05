@@ -22,6 +22,8 @@ The source is available for download from [GitHub](https://github.com/ricardofba
 ## API
 
 ### Flow control
+* [resume](#resume)
+* [pause](#pause)
 * [start](#start)
 * [stop](#stop)
 * [goTo](#goTo)
