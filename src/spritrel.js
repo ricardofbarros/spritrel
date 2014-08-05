@@ -91,13 +91,16 @@
             clearInterval(loop);                     
         };
         
+        var changePosition = function() {
+            var posX = Spritrel._countCols * options.width;
+            var posY = Spritrel._countRows * options.height;
+            element.style.backgroundPosition =  '-'+posX+'px -'+posY+'px';
+        };
+        
         Spritrel.resume = function() {
             Spritrel.pause();
             loop = setInterval(function() {
-                var posX = Spritrel._countCols * options.width;
-                var posY = Spritrel._countRows * options.height;
-                element.style.backgroundPosition =  '-'+posX+'px -'+posY+'px';
-                
+                changePosition();
                 if(Spritrel._direction === 'right') {
                     if(Spritrel._countRows >= (options.rows - 1) && Spritrel._countCols >= (options.cols - 1)) {
                         resetCounters();
@@ -137,7 +140,9 @@
         
         
         Spritrel.goTo = function(sprite) {
-
+            Spritrel._countCols = sprite % options.cols;
+            Spritrel._countRows = Math.floor(sprite / options.cols);
+            changePosition();
         };
 
 
